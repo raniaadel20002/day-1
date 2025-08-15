@@ -59,7 +59,7 @@ function hr(title) {
 hr("A) Console basics");
 
 // 1) Log the course name from `classroom`.
-
+console.log();
 
 // 3) Log the entire `student` object, then log only `student.contact`.
 console.log();
