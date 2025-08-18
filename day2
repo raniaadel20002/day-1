@@ -20,7 +20,7 @@ console.log("\\nTask 2 — Decisions with && and ||");
 let a = 12;
 let b = 5;
 let c = 0;
-let isNiceNumber = "true";
+let isNiceNumber = true;
 if (a % 2 === 0 && b % 2 !== 0 || !c) {
 // Create a variable 'isNiceNumber' that is TRUE only if:
 //   - a is even AND b is odd OR c is NOT truthy (use !c)
@@ -50,8 +50,8 @@ console.log("hasTechDeal =", hasTechDeal);
 // ------------------------------
 console.log("\\nTask 4 — Truthy vs Falsy");
 let values = [0, "hi", "", 42, null];
-let truthy = [];
-let falsy = [];
+let truthy ;
+let falsy;
 // Create two arrays: truthy and falsy. Then, using if/else for EACH element by index,
 // push the value into the correct array. Use the logical NOT operator to test falsy.
 
@@ -133,17 +133,26 @@ console.log("myBike.powered  =", myBike.powered);
 // ------------------------------
 console.log("\\nTask 7 — keys & values");
 let scores = { Alice: 17, Bob: 22, Carol: 22 };
-
+let names = Object.keys(scores);
 // 1) Make two variables: names = Object.keys(scores), numbers = Object.values(scores)
 /* TODO */
-
+let numbers = Object.values(scores);
 // 2) Make 'hasBob' true if "Bob" exists in names.
 let hasBob;
+let hasBob = names.includes("Bob");
 
 // 3) Decide a winner name and store in 'winner' by comparing the known properties with if/else.
 //    If there is a tie, set winner to "TIE". (No loops; compare known keys)
 let winner;
-
+if (scores.Amina > scores.Omar && scores.Amina > scores.Sara) {
+  winner = "Amina";
+} else if (scores.Omar > scores.Amina && scores.Omar > scores.Sara) {
+  winner = "Omar";
+} else if (scores.Sara > scores.Amina && scores.Sara > scores.Omar) {
+  winner = "Sara";
+} else {
+  winner = "TIE";
+}
 console.log("names  =", names);
 console.log("numbers=", numbers);
 console.log("hasBob =", hasBob);
@@ -162,7 +171,15 @@ let customer = { age: 20, isStudent: true, hasCoupon: true };
 //   4) Else: price = 12
 //   After that, if hasCoupon is true, subtract 2 (but not below 0).
 let price;
-
+if (age < 6) {
+  price = 0;
+} else if (age <= 18 || Student == true) {
+  price = 8;
+} else if ( age >= 65) {
+  price = 6;
+} else {
+  price = 12;
+}
 console.log("price =", price);
 
 
@@ -171,7 +188,9 @@ console.log("price =", price);
 // ------------------------------
 console.log("\\nTask 9 — String methods");
 let rawName = "   PreProgramming JavaScript   ";
-
+rawName.trim();
+rawName.charAt(0).toUpperCase();
+rawName.slice(1).toLowerCase();
 // Create 'displayName' so that:
 //   - trims spaces
 //   - first letter uppercase
@@ -179,7 +198,7 @@ let rawName = "   PreProgramming JavaScript   ";
 let displayName;
 
 // Create 'hasProgram' that is TRUE if the (trimmed, lowercased) string contains "program".
-let hasProgram;
+let hasProgram = trimmed.toLowerCase().include("program");
 
 console.log("displayName =", displayName);
 console.log("hasProgram  =", hasProgram);
