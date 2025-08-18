@@ -95,11 +95,11 @@ console.log("falsy  =", falsy);
 console.log("\\nTask 5 — Object.assign merge");
 let defaults = { theme: "light", pageSize: 20, showTips: true };
 let overrides = { theme: "", pageSize: 50 }; // falsy value "" should still override
-Object.assign(defaults , overrides);  
+Object.assign(overrides ,defaults);  
 console.log(overrides);
 // Create 'settings' as a MERGE of defaults and overrides WITHOUT mutating 'defaults'.
 // Use Object.assign on an empty object or a shallow copy of defaults.
-let settings;
+let settings = Object.create( overrides);
 
 console.log("settings =", settings);
 console.log("defaults still =", defaults);
@@ -114,12 +114,14 @@ let vehicleBase = {
   wheels: 0,
   powered: true
 };
-
+let myBike;
+let vehicleBase = Object.create( myBike);
 // Using Object.create, make myBike that INHERITS from vehicleBase,
 // and give it its OWN properties: kind: "bike", wheels: 2, brand: "EcoRide".
-let myBike;
+myBike.kind = "bike"; 
+myBike.wheels = "2";
 // e.g., myBike.kind = "bike"; ...
-
+myBike.brand = "EcoRide";
 // Check prototype data access (should read from prototype if not on the object itself).
 console.log("myBike.kind     =", myBike.kind);
 console.log("myBike.wheels   =", myBike.wheels);
