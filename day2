@@ -20,7 +20,7 @@ console.log("\\nTask 2 — Decisions with && and ||");
 let a = 12;
 let b = 5;
 let c = 0;
-let isNiceNumber = true;
+let isNiceNumber = "true";
 if (a % 2 === 0 && b % 2 !== 0 || !c) {
 // Create a variable 'isNiceNumber' that is TRUE only if:
 //   - a is even AND b is odd OR c is NOT truthy (use !c)
@@ -39,8 +39,8 @@ let cartB = ["Laptop", "Camera"];
 
 // Create 'hasTechDeal' that is TRUE if EITHER cart contains "Laptop" OR "Camera".
 // Use includes or indexOf (no loops).
-let hasTechDeal =cartA.includes("Laptop") || cartA.includes("Camera") ||
-  cartB.includes("Laptop") || cartB.includes("Camera");
+let hasTechDeal = cartA.includes("Laptop") || cartA.includes("Camera") ||
+                  cartB.includes("Laptop") || cartB.includes("Camera");
 
 console.log("hasTechDeal =", hasTechDeal);
 
@@ -50,32 +50,41 @@ console.log("hasTechDeal =", hasTechDeal);
 // ------------------------------
 console.log("\\nTask 4 — Truthy vs Falsy");
 let values = [0, "hi", "", 42, null];
-
-// Create two arrays: truthy and falsy. Then, using if/else for EACH element by index,
-// push the value into the correct array. Use the logical NOT operator to test falsy.
 let truthy = [];
 let falsy = [];
+// Create two arrays: truthy and falsy. Then, using if/else for EACH element by index,
+// push the value into the correct array. Use the logical NOT operator to test falsy.
 
 // value at index 0
 // if value is falsy, push it to falsy array
 // if value is truthy, push it to truthy array
-
+if (!values[0]) {
+  falsy.push(values[0]);
+} else {truthy.push(values[0]);}
 // value at index 1
 // if value is falsy, push it to falsy array
 // if value is truthy, push it to truthy array
-
+if (!values[1]) {
+  falsy.push(values[1]);
+} else {truthy.push(values[1]);}
 // value at index 2
 // if value is falsy, push it to falsy array
 // if value is truthy, push it to truthy array
-
+if (!values[2]) {
+  falsy.push(values[2]);
+} else {truthy.push(values[2]);}
 // value at index 3
 // if value is falsy, push it to falsy array
 // if value is truthy, push it to truthy array
-
+if (!values[3]) {
+  falsy.push(values[3]);
+} else {truthy.push(values[3]);}
 // value at index 4
 // if value is falsy, push it to falsy array
 // if value is truthy, push it to truthy array
-
+if (!values[4]) {
+  falsy.push(values[4]);
+} else {truthy.push(values[4]);}
 console.log("truthy =", truthy);
 console.log("falsy  =", falsy);
 
@@ -86,7 +95,8 @@ console.log("falsy  =", falsy);
 console.log("\\nTask 5 — Object.assign merge");
 let defaults = { theme: "light", pageSize: 20, showTips: true };
 let overrides = { theme: "", pageSize: 50 }; // falsy value "" should still override
-
+Object.assign(defaults , overrides);  
+console.log(overrides);
 // Create 'settings' as a MERGE of defaults and overrides WITHOUT mutating 'defaults'.
 // Use Object.assign on an empty object or a shallow copy of defaults.
 let settings;
