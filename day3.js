@@ -19,6 +19,8 @@
 // Return how many vowels are inside str (a, e, i, o, u).
 // Make it case-insensitive (e.g., "A" counts). Use a loop, no regex.
 // ------------------------------------------------------------
+
+
 function countVowels(str) {
     str = str.toLowerCase();
     let vowels ="aeiou";
@@ -44,13 +46,10 @@ function invertCase(str) {
     let results= ""; 
         for (let ch of str) {
         if (ch === ch.toUpperCase() && ch !== ch.toLowerCase()) {
-            // Uppercase letter → make it lowercase
             results += ch.toLowerCase();
         } else if (ch === ch.toLowerCase() && ch !== ch.toUpperCase()) {
-            // Lowercase letter → make it uppercase
             results += ch.toUpperCase();
         } else {
-            // Non-alphabetic (digits, spaces, symbols) → keep as-is
             results += ch;
         }
     }
@@ -68,17 +67,20 @@ function uniqueMerge(a, b) {
     // TODO
     a =[1,2,2];
     b =[1,3,2];
-    let i = [];
-    for (let num of a){ 
-        if (!i.includes(num)){
-           i.push(num);
+    let j = [];
+    let numa = a.length;
+    let numb = b.length;
+    for (i=0;i===a.length;i++){ 
+        if (!j.includes(numa)){
+          break;
+
     }}
-   for (let num of b){ 
-        if (!i.includes(num)){
-           i.push(num);
+   for (i=0;i===b.length;i++){ 
+        if (!j.includes(numb)){
+            break;
     }}
     // Hint: start with result = []. Loop a then b; push if not already included.
-    return []; // replace
+    // replace
 }
 
 
@@ -89,7 +91,13 @@ function uniqueMerge(a, b) {
 // ------------------------------------------------------------
 function findFirstIndexDivisibleBy(nums, x, y) {
     // TODO
-    return -1; // replace
+   
+    let num=[];
+   for (i=0;i=num.length;i++) 
+    if (i % x===0 & i%y===0){
+        return i
+    } 
+   return -1; // replace
 }
 
 
@@ -99,7 +107,11 @@ function findFirstIndexDivisibleBy(nums, x, y) {
 // Use a loop and logical operators (no .every).
 // ------------------------------------------------------------
 function allTruthy(values) {
-    // TODO
+    for (let i = 0; i < values.length; i++){
+        if (values[i]) { 
+            return true;
+        }
+    }
     return false; // replace
 }
 
@@ -111,6 +123,9 @@ function allTruthy(values) {
 // ------------------------------------------------------------
 function pickEveryNth(arr, n) {
     // TODO
+    for (let i = 0; i < arr.length; i+=n){
+        return arr[i];
+    }
     return []; // replace
 }
 
@@ -127,6 +142,19 @@ function pickEveryNth(arr, n) {
 // Return the final price.
 // ------------------------------------------------------------
 function ticketPrice(customer) {
+    let price;
+    if (customer.age < 6) {
+        price = 0;
+    } else if (customer.age <= 18 || customer.isStudent) {
+        price = 8;
+    } else if (customer.age >= 65) {
+        price = 6;
+    } else {
+        price = 12;
+    }
+    if (customer.hasCoupon) {
+        price = Math.max(price - 2, 0);
+    }
     // TODO (use if / else if / else and && / || / !)
     return -1; // replace
 }
@@ -140,7 +168,15 @@ function ticketPrice(customer) {
 // Use loops + basic string methods. No map.
 // ------------------------------------------------------------
 function normalizeNames(names) {
-    // TODO
+    let result = [];
+
+    for (let name of names) {
+        let trimmed = name.trim();
+        let firstLetter = trimmed.charAt(0).toUpperCase();
+        let rest = trimmed.slice(1).toLowerCase();
+        result.push(firstLetter + rest);
+    }                                           
+    // TODO        
     // Hint: build result with push. For each name: trim -> split(" ") optional ->
     // lower the string -> uppercase the first character of the first word only is OK.
     return []; // replace
@@ -162,6 +198,13 @@ const productProto = {
 };
 
 function buildProductCatalog(rawItems) {
+    for (let item of rawItems) {
+        item = Object.create(productProto);
+        item.name = item.name;
+        item.brand = item.brand;
+        item.stock = item.stock;
+        catalog.push(item);
+    }
     // TODO
     // Hint: for each item, create obj = Object.create(productProto);
     // copy properties (name/brand/stock) into it; push into result.
@@ -176,7 +219,11 @@ function buildProductCatalog(rawItems) {
 // ------------------------------------------------------------
 function sumUntilLimit(nums, limit) {
     // TODO (while loop)
-    return 0; // replace
+    while (i<nums.length){ 
+        sum = sum + nums[i];
+        i++;
+    }
+    return sum; // replace
 }
 
 // ------------------------------------------------------------
@@ -191,7 +238,11 @@ function sumUntilLimit(nums, limit) {
 // ------------------------------------------------------------
 function safeLogin(user, policy) {
     // TODO
-    return false; // replace
+    let pwd=user.password;
+    if (pwd.length < policy.minLen) return false;
+    if (policy.mustIncludeNumber && !/\d/.test(pwd)) return false;
+    if (pwd.toLowerCase().includes(policy.blockWord.toLowerCase())) return false;
+    return true; // replace
 }
 
 
@@ -199,56 +250,56 @@ function safeLogin(user, policy) {
 // DEMO CALLS (Uncomment to test as you solve)
 // ============================================================
 
-// console.log("\n--- Task 1 ---");
-// console.log(countVowels("Ammar Massoud")); // expect > 0
+console.log("\n--- Task 1 ---");
+console.log(countVowels("Ammar Massoud")); // expect > 0
 
-// console.log("\n--- Task 2 ---");
-// console.log(invertCase("HeLLo 123!")); // "hEllO 123!"
+console.log("\n--- Task 2 ---");
+console.log(invertCase("HeLLo 123!")); // "hEllO 123!"
 
-// console.log("\n--- Task 3 ---");
-// console.log(uniqueMerge([1,2,3,2],[3,4,1,5])); // [1,2,3,4,5]
+console.log("\n--- Task 3 ---");
+console.log(uniqueMerge([1,2,3,2],[3,4,1,5])); // [1,2,3,4,5]
 
-// console.log("\n--- Task 4 ---");
-// console.log(findFirstIndexDivisibleBy([2,7,9,10,12,15,22], 3, 5)); // index of 15
+console.log("\n--- Task 4 ---");
+console.log(findFirstIndexDivisibleBy([2,7,9,10,12,15,22], 3, 5)); // index of 15
 
-// console.log("\n--- Task 5 ---");
-// console.log(allTruthy([1, "x", {}, []])); // true
-// console.log(allTruthy([1, 0, "x"])); // false
+console.log("\n--- Task 5 ---");
+console.log(allTruthy([1, "x", {}, []])); // true
+console.log(allTruthy([1, 0, "x"])); // false
 
-// console.log("\n--- Task 6 ---");
-// console.log(pickEveryNth(["a","b","c","d","e","f"], 2)); // ["a","c","e"]
+console.log("\n--- Task 6 ---");
+console.log(pickEveryNth(["a","b","c","d","e","f"], 2)); // ["a","c","e"]
 
-// console.log("\n--- Task 7 ---");
-// console.log(ticketPrice({ age: 4, isStudent: false, hasCoupon: false }));  // 0
-// console.log(ticketPrice({ age: 15, isStudent: false, hasCoupon: true }));  // 6
-// console.log(ticketPrice({ age: 20, isStudent: true, hasCoupon: true }));   // 6
-// console.log(ticketPrice({ age: 70, isStudent: false, hasCoupon: true }));  // 4
-// console.log(ticketPrice({ age: 30, isStudent: false, hasCoupon: true }));  // 10
+console.log("\n--- Task 7 ---");
+console.log(ticketPrice({ age: 4, isStudent: false, hasCoupon: false }));  // 0
+console.log(ticketPrice({ age: 15, isStudent: false, hasCoupon: true }));  // 6
+console.log(ticketPrice({ age: 20, isStudent: true, hasCoupon: true }));   // 6
+console.log(ticketPrice({ age: 70, isStudent: false, hasCoupon: true }));  // 4
+console.log(ticketPrice({ age: 30, isStudent: false, hasCoupon: true }));  // 10
 
-// console.log("\n--- Task 8 ---");
-// console.log(normalizeNames(["   aMMaR massOUD  ", " SARA ", "oMaR"]));
+console.log("\n--- Task 8 ---");
+console.log(normalizeNames(["   aMMaR massOUD  ", " SARA ", "oMaR"]));
 
-// console.log("\n--- Task 9 ---");
-// const items = [
-//   { name: "Mouse", brand: "Logi", stock: 10 },
-//   { name: "SSD", stock: 0 },
-//   { name: "Keyboard", brand: "KeyCo", stock: 3 },
-// ];
-// const catalog = buildProductCatalog(items);
-// console.log(catalog.map(p => ({ label: p.label(), available: p.isAvailable() })));
+console.log("\n--- Task 9 ---");
+const items = [
+  { name: "Mouse", brand: "Logi", stock: 10 },
+  { name: "SSD", stock: 0 },
+  { name: "Keyboard", brand: "KeyCo", stock: 3 },
+];
+const catalog = buildProductCatalog(items);
+console.log(catalog.map(p => ({ label: p.label(), available: p.isAvailable() })));
 
-// console.log("\n--- Task 10 ---");
-// console.log(scoresReport({ Alice: 17, Bob: 22, Carol: 22, Dan: 9 }));
+console.log("\n--- Task 10 ---");
+console.log(scoresReport({ Alice: 17, Bob: 22, Carol: 22, Dan: 9 }));
 
-// console.log("\n--- Task 11 ---");
-// console.log(sumUntilLimit([5, 7, 4], 12)); // 12
-// console.log(sumUntilLimit([6, 6, 6], 10)); // 6
+console.log("\n--- Task 11 ---");
+console.log(sumUntilLimit([5, 7, 4], 12)); // 12
+console.log(sumUntilLimit([6, 6, 6], 10)); // 6
 
-// console.log("\n--- Task 12 ---");
-// console.log(safeLogin(
-//   { email: "a@b.com", password: "He11oWorld" },
-//   { minLen: 8, mustIncludeNumber: true, blockWord: "password" }
-// )); // true or false depending on rules
+console.log("\n--- Task 12 ---");
+console.log(safeLogin(
+  { email: "a@b.com", password: "He11oWorld" },
+  { minLen: 8, mustIncludeNumber: true, blockWord: "password" }
+)); // true or false depending on rules
 
 // ============================================================
 // End — Have fun!
