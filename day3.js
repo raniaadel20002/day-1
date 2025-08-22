@@ -70,15 +70,16 @@ function uniqueMerge(a, b) {
     let j = [];
     let numa = a.length;
     let numb = b.length;
-    for (i=0;i===a.length;i++){ 
+    for (i=0;i < a.length;i++){ 
         if (!j.includes(numa)){
-          break;
+            j.push(a[i]);
 
     }}
-   for (i=0;i===b.length;i++){ 
+    for (i=0;i < b.length;i++){ 
         if (!j.includes(numb)){
-            break;
+            j.push(b[i]);
     }}
+    return j;
     // Hint: start with result = []. Loop a then b; push if not already included.
     // replace
 }
@@ -145,18 +146,25 @@ function ticketPrice(customer) {
     let price;
     if (customer.age < 6) {
         price = 0;
+      
     } else if (customer.age <= 18 || customer.isStudent) {
         price = 8;
+        
     } else if (customer.age >= 65) {
         price = 6;
+      
     } else {
         price = 12;
+        
     }
+    
     if (customer.hasCoupon) {
         price = Math.max(price - 2, 0);
     }
+    return price;
+
     // TODO (use if / else if / else and && / || / !)
-    return -1; // replace
+  
 }
 
 
@@ -179,7 +187,7 @@ function normalizeNames(names) {
     // TODO        
     // Hint: build result with push. For each name: trim -> split(" ") optional ->
     // lower the string -> uppercase the first character of the first word only is OK.
-    return []; // replace
+    return result; // replace
 }
 
 
@@ -192,23 +200,25 @@ function normalizeNames(names) {
 //   - label(): returns (this.brand || "Generic") + " " + this.name
 // Return an array of product instances. Use a loop (no map).
 // ------------------------------------------------------------
+
 const productProto = {
     isAvailable: function () { return this.stock > 0; },
     label: function () { return (this.brand || "Generic") + " " + this.name; }
 };
 
 function buildProductCatalog(rawItems) {
+    const results = [];
     for (let item of rawItems) {
-        item = Object.create(productProto);
-        item.name = item.name;
-        item.brand = item.brand;
-        item.stock = item.stock;
-        catalog.push(item);
+        let obj = Object.create(productProto);
+        obj.name = item.name;
+        obj.brand = item.brand;
+        obj.stock = item.stock;
+        results.push(obj);
     }
     // TODO
     // Hint: for each item, create obj = Object.create(productProto);
     // copy properties (name/brand/stock) into it; push into result.
-    return []; // replace
+    return results; // replace
 }
 
 // ------------------------------------------------------------
@@ -217,9 +227,11 @@ function buildProductCatalog(rawItems) {
 // the running sum would EXCEED 'limit' — then stop and return the sum that
 // does NOT exceed the limit. Example: nums=[5,7,4], limit=12 => 5+7=12 (stop) -> 12
 // ------------------------------------------------------------
-function sumUntilLimit(nums, limit) {
+function scoresReport(nums, limit) {
     // TODO (while loop)
-    while (i<nums.length){ 
+    let sum = 0;
+    let i = 0;
+    while (i<nums.length && sum + nums[i] < limit){ 
         sum = sum + nums[i];
         i++;
     }
@@ -238,11 +250,28 @@ function sumUntilLimit(nums, limit) {
 // ------------------------------------------------------------
 function safeLogin(user, policy) {
     // TODO
-    let pwd=user.password;
-    if (pwd.length < policy.minLen) return false;
-    if (policy.mustIncludeNumber && !/\d/.test(pwd)) return false;
-    if (pwd.toLowerCase().includes(policy.blockWord.toLowerCase())) return false;
-    return true; // replace
+  let password = user.password;
+  let minLen = policy.minLen;
+  let mustIncludeNumber = policy.mustIncludeNumber;
+  let blockWord = policy.blockWord.toLowerCase();
+
+  if (password.length < minLen) return false;
+
+  if (mustIncludeNumber) {
+    let hasNumber = false;
+    for (let i = 0; i < password.length; i++) {
+      if (password[i] >= '0' && password[i] <= '9') {
+        hasNumber = true;
+        break;
+      }
+    }
+    if (!hasNumber) return false;
+  }
+
+  let lowerPass = password.toLowerCase();
+  if (lowerPass.includes(blockWord)) return false;
+
+  return true;
 }
 
 
@@ -292,14 +321,10 @@ console.log("\n--- Task 10 ---");
 console.log(scoresReport({ Alice: 17, Bob: 22, Carol: 22, Dan: 9 }));
 
 console.log("\n--- Task 11 ---");
-console.log(sumUntilLimit([5, 7, 4], 12)); // 12
-console.log(sumUntilLimit([6, 6, 6], 10)); // 6
-
-console.log("\n--- Task 12 ---");
 console.log(safeLogin(
   { email: "a@b.com", password: "He11oWorld" },
   { minLen: 8, mustIncludeNumber: true, blockWord: "password" }
-)); // true or false depending on rules
+));// true or false depending on rules
 
 // ============================================================
 // End — Have fun!
